@@ -1,0 +1,25 @@
+	<<Runnable>>
+	Server
+- ServerSocket
+- ArrayList <   >   //conexiones
+- Socket 			//auxiliar
+- Puerto			//cambia dependiendo de el uso
+- Direccion IP		//unica
+
+
+	<<Runnable>>
+	Customer
+- Socket				//la conexion con el usuario
+- DataInputStream		//metodo de entrada
+- DataOutputStream		//metodo de salida
+
+
+
+
+	<<Runnable>>
+	Connect
+- Socket				//la conexion con el servidor
+- DataInputStream		//metodo de entrada
+- DataOutputStream		//metodo de salida
+- Puerto				//cambia dependiendo de el uso
+- Direccion IP			//unica
