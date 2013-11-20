@@ -23,6 +23,7 @@ public class Song {
 		this.name = name;
 		letter = new ArrayList<String>();
 		fileManager = new FileManager(name);
+		updateSong();
 	}
 	
 	public void updateSong(){
