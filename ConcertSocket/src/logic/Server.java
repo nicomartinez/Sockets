@@ -8,6 +8,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
  * @author Juan Nicolas Martinez Fagua
  *
@@ -47,7 +49,6 @@ public class Server implements Runnable{
 		cup = 0;
 		pause = false;
 		stop = false;
-		//thread = new Thread(this);
 		speed = 1000;
 		
 		port = 3500;
@@ -60,7 +61,6 @@ public class Server implements Runnable{
 		cup = 0;
 		pause = false;
 		stop = false;
-		//thread = new Thread(this);
 		speed = 1000;
 		
 		this.port = port;
@@ -107,12 +107,16 @@ public class Server implements Runnable{
 			System.out.println("esperando conexiones");
 			
 			try {
-				socketAux = serverSocket.accept();
-				connections.add(new Connect(socketAux));
-				cup += 1;
-				System.out.println("nueva conexion aceptada");
+				if(cup < capacity){
+					socketAux = serverSocket.accept();
+					connections.add(new Connect(socketAux));
+					cup += 1;
+					System.out.println("nueva conexion aceptada");
+				}else{
+					JOptionPane.showMessageDialog(null, "el cupo permitido esta completo");
+				}
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "no se puede realizar conexion");
 			}
 			
 			

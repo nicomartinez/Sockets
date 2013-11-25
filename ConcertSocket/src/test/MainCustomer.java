@@ -3,6 +3,7 @@
  */
 package test;
 
+import presentation.WindowCustomer;
 import logic.Customer;
 
 /**
@@ -14,6 +15,7 @@ public class MainCustomer {
 
 	public static void main(String[] args) {
 		//Customer customer = 
-		new Customer();
+		//new Customer();
+		WindowCustomer customer = new WindowCustomer();
 	}
 }

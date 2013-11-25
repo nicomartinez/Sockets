@@ -74,6 +74,39 @@ public class Customer implements Runnable{
 
 		start();
 	}
+	
+	public Customer(int port, String ip) {
+		pause = false;
+		stop = false;
+		speed = 1000;
+		thread = new Thread(this);
+		
+		try {
+			//socket = new Socket(InetAddress.getByName("localhost"), 4500);
+			socket = new Socket(ip, port);
+		} catch (UnknownHostException e) {
+			//e.printStackTrace();
+			System.out.println("el host no existe");
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("el puerto no disponible");
+		}
+
+		try {
+			inputStream = new DataInputStream(socket.getInputStream());
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("error creando canales de entrada");
+		}
+		try {
+			outputStream = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			//e.printStackTrace();
+			System.out.println("error creando el canal de salida");
+		}
+
+		start();
+	}
 
 
 	public void closeConnetion(){
@@ -98,7 +131,7 @@ public class Customer implements Runnable{
 		try {
 			outputStream.writeInt(option);
 
-			outputStream.writeUTF("mensaje");
+			//outputStream.writeUTF("mensaje");
 		} catch (IOException e) {
 			//e.printStackTrace();
 			
