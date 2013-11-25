@@ -16,11 +16,13 @@ public class Song {
 	private FileManager fileManager;
 	private ArrayList<String> letter;
 	private String name;
+	private int life;
 	/**
 	 * este es el metodo constructor de la clase Song.java
 	 */
-	public Song(String name) {
+	public Song(String name, int life) {
 		this.name = name;
+		this.life = life;
 		letter = new ArrayList<String>();
 		fileManager = new FileManager(name);
 		updateSong();
@@ -57,6 +59,20 @@ public class Song {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the life
+	 */
+	public int getLife() {
+		return life;
+	}
+
+	/**
+	 * @param life the life to set
+	 */
+	public void setLife(int life) {
+		this.life = life;
 	}
 	
 	

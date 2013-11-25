@@ -25,22 +25,18 @@ public class MainServer extends JFrame implements ActionListener{
 	 */
 	public MainServer() {
 		super("Generadpr de Servidores");
-		setSize(200, 200);
+		setSize(300, 100);
 		setLayout(null);
 		
 		btnCreate = new JButton("Crear Servidor");
-		btnCreate.setBounds(30, 90, 150, 30);
+		btnCreate.setBounds(50, 20, 150, 30);
 		btnCreate.addActionListener(this);
 		
+		add(btnCreate);
 		
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-//		Server server = new Server();
-//		server.initServer();
-		
-	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -51,5 +47,11 @@ public class MainServer extends JFrame implements ActionListener{
 			
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+//		Server server = new Server();
+//		server.initServer();
+		MainServer mainServer = new MainServer();
 	}
 }

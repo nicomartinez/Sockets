@@ -24,12 +24,22 @@ public class Concert {
 		
 	}
 	
+	public Concert(String name, int price) {
+		this.name = name;
+		this.price = price;
+		this.priceSong = priceSong;
+	}
+	
 	public void fillSongs(){
-		songs.add(new Song("q"));
-		songs.add(new Song("e"));
-		songs.add(new Song("r"));
-		songs.add(new Song("f"));
-		songs.add(new Song("g"));
+		songs.add(new Song("q", 1000));
+		songs.add(new Song("e", 2000));
+		songs.add(new Song("r", 1500));
+		songs.add(new Song("f", 3000));
+		songs.add(new Song("g", 500));
+	}
+	
+	public int calculateCost(int duration, Song song){
+		return price * song.getLife();
 	}
 
 	/**

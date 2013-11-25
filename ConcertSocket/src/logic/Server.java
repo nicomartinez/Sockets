@@ -24,6 +24,10 @@ public class Server implements Runnable{
 	private boolean pause;
 	private Thread thread;
 	private long speed;
+	
+	private int capacity;
+	private Concert concert;
+	
 
 	public long getSpeed() {
 		return this.speed;
@@ -33,7 +37,7 @@ public class Server implements Runnable{
 		this.speed = speed;
 	}
 
-
+	
 
 	/**
 	 * este es el metodo constructor de la clase Server.java
@@ -49,6 +53,20 @@ public class Server implements Runnable{
 		thread = new Thread(this);
 		
 	}
+	
+	public Server(int capacity, String name, int price) {
+		pause = false;
+		stop = false;
+		//thread = new Thread(this);
+		speed = 1000;
+		
+		port = 3500;
+		concert = new Concert(name, price);
+		connections = new ArrayList<Connect>();
+		thread = new Thread(this);
+		
+	}
+
 
 	public void initServer(){
 		if(serverSocket == null){

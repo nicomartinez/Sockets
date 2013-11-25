@@ -30,6 +30,9 @@ public class Connect implements Runnable{
 
 	private int option;
 	
+	
+	
+	
 	private BufferedImage bufferedImage;;
 	
 	/**
