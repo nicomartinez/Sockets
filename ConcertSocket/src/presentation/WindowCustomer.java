@@ -43,6 +43,7 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		setSize(400, 400);
 		setLayout(new FlowLayout());
 		setResizable(false);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		init();
 		addComponents();
@@ -58,7 +59,9 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		txtPort = new JTextField(13);
 		
 		btnConnect = new JButton("conectar");
+		btnConnect.addActionListener(this);
 		btnShowList = new JButton("mostrar servidores");
+		btnShowList.addActionListener(this);
 		
 		areaConcert = new JTextArea(15,30);
 		areaConcert.setEditable(false);
@@ -96,7 +99,7 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		if(e.getActionCommand().equals("conectar")&& !txtIP.getText().isEmpty() && !txtPort.getText().isEmpty()){
 			try {
 				customer = new Customer(Integer.parseInt(txtPort.getText()), txtIP.getText());
-				customer.initCommunication(3);
+				customer.initCommunication(1);
 				btnConnect.setText("desconectar");
 			} catch (Exception e2) {
 				JOptionPane.showMessageDialog(this, "por favor verifique la informacion");

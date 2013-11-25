@@ -92,7 +92,8 @@ public class WindowServer extends JFrame implements ActionListener{
 			if(!txtCapacity.getText().isEmpty() && !txtNumberPort.getText().isEmpty() && !txtPrice.getText().isEmpty()){
 				try {
 					server = new Server(Integer.parseInt(txtCapacity.getText()), (String) comboConcert.getSelectedItem(), Integer.parseInt(txtPrice.getText()), Integer.parseInt(txtNumberPort.getText()));
-					
+					server.initServer();
+					//this.dispose();
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
 				}

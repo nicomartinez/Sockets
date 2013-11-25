@@ -50,7 +50,7 @@ public class Server implements Runnable{
 		pause = false;
 		stop = false;
 		speed = 1000;
-		
+		capacity = 0;
 		port = 3500;
 		connections = new ArrayList<Connect>();
 		thread = new Thread(this);
@@ -64,6 +64,7 @@ public class Server implements Runnable{
 		speed = 1000;
 		
 		this.port = port;
+		this.capacity = capacity;
 		concert = new Concert(name, price);
 		connections = new ArrayList<Connect>();
 		thread = new Thread(this);
