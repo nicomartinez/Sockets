@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import presentation.WindowServer;
+
 import logic.Server;
 
 /**
@@ -27,6 +29,7 @@ public class MainServer extends JFrame implements ActionListener{
 		super("Generadpr de Servidores");
 		setSize(300, 100);
 		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		btnCreate = new JButton("Crear Servidor");
 		btnCreate.setBounds(50, 20, 150, 30);
@@ -44,7 +47,7 @@ public class MainServer extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("Crear Servidor")){
-			
+			WindowServer windowServer = new WindowServer();
 		}
 		
 	}

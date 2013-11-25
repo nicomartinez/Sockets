@@ -26,6 +26,7 @@ public class Server implements Runnable{
 	private long speed;
 	
 	private int capacity;
+	private int cup;
 	private Concert concert;
 	
 
@@ -43,6 +44,7 @@ public class Server implements Runnable{
 	 * este es el metodo constructor de la clase Server.java
 	 */
 	public Server() {
+		cup = 0;
 		pause = false;
 		stop = false;
 		//thread = new Thread(this);
@@ -54,13 +56,14 @@ public class Server implements Runnable{
 		
 	}
 	
-	public Server(int capacity, String name, int price) {
+	public Server(int capacity, String name, int price, int port) {
+		cup = 0;
 		pause = false;
 		stop = false;
 		//thread = new Thread(this);
 		speed = 1000;
 		
-		port = 3500;
+		this.port = port;
 		concert = new Concert(name, price);
 		connections = new ArrayList<Connect>();
 		thread = new Thread(this);
@@ -78,6 +81,13 @@ public class Server implements Runnable{
 				System.out.println();
 			}
 		}
+	}
+	
+	public void disconncet(int numberConnect){
+		connections.get(numberConnect).closeConnetion();
+		connections.remove(numberConnect);
+		cup -= 1;
+		
 	}
 
 	public void closeServer(){
@@ -99,6 +109,7 @@ public class Server implements Runnable{
 			try {
 				socketAux = serverSocket.accept();
 				connections.add(new Connect(socketAux));
+				cup += 1;
 				System.out.println("nueva conexion aceptada");
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -146,4 +157,75 @@ public class Server implements Runnable{
 		notify();
 	}
 
+	/**
+	 * @return the connections
+	 */
+	public ArrayList<Connect> getConnections() {
+		return connections;
+	}
+
+	/**
+	 * @param connections the connections to set
+	 */
+	public void setConnections(ArrayList<Connect> connections) {
+		this.connections = connections;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @return the cup
+	 */
+	public int getCup() {
+		return cup;
+	}
+
+	/**
+	 * @param cup the cup to set
+	 */
+	public void setCup(int cup) {
+		this.cup = cup;
+	}
+
+	/**
+	 * @return the concert
+	 */
+	public Concert getConcert() {
+		return concert;
+	}
+
+	/**
+	 * @param concert the concert to set
+	 */
+	public void setConcert(Concert concert) {
+		this.concert = concert;
+	}
+
+	
 }
