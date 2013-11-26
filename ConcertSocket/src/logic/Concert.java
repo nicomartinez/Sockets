@@ -65,7 +65,7 @@ public class Concert implements Runnable{
 		this.capacity = capacity;
 		//concert = new Concert(name, price);
 		connections = new ArrayList<Connect>();
-		
+		fillSongs();
 		thread = new Thread(this);
 	}
 	
