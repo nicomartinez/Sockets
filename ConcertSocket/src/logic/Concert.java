@@ -132,7 +132,7 @@ public class Concert implements Runnable{
 			for (Connect connection : connections) {
 				connection.initCommunication(letter);
 			}
-		}
+		} 
 	}
 	
 	/* (non-Javadoc)
