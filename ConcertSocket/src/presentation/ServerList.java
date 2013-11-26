@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
-import logic.Server;
+import logic.Concert;
 
 /**
  * @author Juan Nicolas Martinez Fagua
@@ -16,13 +16,14 @@ import logic.Server;
  */
 public class ServerList extends JFrame{
 	
-	private ArrayList<Server> servers;
+	private ArrayList<Concert> servers;
 	private JTextArea listServers;
+	
 	/**
 	 * este es el metodo constructor de la clase ServerList.java
 	 */
 	public ServerList() {
 		super("Lista de Servidores");
-		// TODO Auto-generated constructor stub
+		
 	}
 }

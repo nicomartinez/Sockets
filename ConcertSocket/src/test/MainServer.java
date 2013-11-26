@@ -6,13 +6,14 @@ package test;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import presentation.WindowServer;
+import logic.Concert;
 
-import logic.Server;
+import presentation.WindowServer;
 
 /**
  * @author Juan Nicolas Martinez Fagua
@@ -21,6 +22,7 @@ import logic.Server;
 public class MainServer extends JFrame implements ActionListener{
 
 	private JButton btnCreate;
+	private ArrayList<Concert> lst;
 	
 	/**
 	 * este es el metodo constructor de la clase MainServer.java
@@ -35,6 +37,8 @@ public class MainServer extends JFrame implements ActionListener{
 		btnCreate.setBounds(50, 20, 150, 30);
 		btnCreate.addActionListener(this);
 		
+		setLst(new ArrayList<Concert>());
+		
 		add(btnCreate);
 		
 		setVisible(true);
@@ -47,7 +51,7 @@ public class MainServer extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("Crear Servidor")){
-			WindowServer windowServer = new WindowServer();
+			WindowServer windowServer = new WindowServer(lst);
 		}
 		
 	}
@@ -56,5 +60,21 @@ public class MainServer extends JFrame implements ActionListener{
 //		Server server = new Server();
 //		server.initServer();
 		MainServer mainServer = new MainServer();
+	}
+
+
+	/**
+	 * @return the lst
+	 */
+	public ArrayList<Concert> getLst() {
+		return lst;
+	}
+
+
+	/**
+	 * @param lst the lst to set
+	 */
+	public void setLst(ArrayList<Concert> lst) {
+		this.lst = lst;
 	}
 }

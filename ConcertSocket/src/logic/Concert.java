@@ -4,6 +4,8 @@
 package logic;
 
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -19,11 +21,21 @@ public class Concert implements Runnable{
 	private int priceSong;
 	private int price;
 	
+	private ServerSocket serverSocket;
+	private ArrayList<Connect> connections;
+	private Socket socketAux;
+	private String ip;
+	private int port;
+	
+	private int capacity;
+	private int cup;
+	//private Concert concert;
+	
 	private boolean stop;
 	private boolean pause;
 	private Thread thread;
 	private long speed;
-	private Connect connect;
+	//private Connect connect;
 	/**
 	 * este es el metodo constructor de la clase Concert.java
 	 */
@@ -31,17 +43,57 @@ public class Concert implements Runnable{
 		pause = false;
 		stop = false;
 		speed = 1000;
+		
+		cup = 0;
+		capacity = 0;
+		port = 3500;
+		connections = new ArrayList<Connect>();
+		
 		thread = new Thread(this);
 	}
 	
-	public Concert(String name, int price) {
+	public Concert(String name, int price, int capacity, int port) {
 		this.name = name;
 		this.price = price;
 		this.priceSong = priceSong;
 		pause = false;
 		stop = false;
 		speed = 1000;
+		
+		cup = 0;
+		this.port = port;
+		this.capacity = capacity;
+		//concert = new Concert(name, price);
+		connections = new ArrayList<Connect>();
+		
 		thread = new Thread(this);
+	}
+	
+
+	public void initServer(){
+		if(serverSocket == null){
+			try {
+				serverSocket = new ServerSocket(port);
+				start();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println();
+			}
+		}
+	}
+	
+	public void disconncet(int numberConnect){
+		connections.get(numberConnect).closeConnetion();
+		connections.remove(numberConnect);
+		cup -= 1;
+		
+	}
+
+	public void closeServer(){
+		for (Connect connection : connections) {
+			connection.closeConnetion();
+			
+		}
 	}
 	
 	public void fillSongs(){
@@ -72,6 +124,51 @@ public class Concert implements Runnable{
 	
 	public int calculateCost(int duration, Song song){
 		return price * song.getLife();
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		while (!stop) {
+
+			System.out.println("esperando conexiones");
+			
+			
+			try {
+				if(cup < capacity){
+					socketAux = serverSocket.accept();
+					connections.add(new Connect(socketAux));
+					cup += 1;
+					System.out.println("nueva conexion aceptada");
+				}else{
+					JOptionPane.showMessageDialog(null, "el cupo permitido esta completo");
+				}
+			} catch (IOException e1) {
+				JOptionPane.showMessageDialog(null, "no se puede realizar conexion");
+			}
+			
+			
+			try {
+				Thread.sleep(speed);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			synchronized (this) {
+				while (pause)
+
+					try {
+						wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				if (stop)
+					break;
+			}
+		}
+
 	}
 
 	/**
@@ -138,36 +235,7 @@ public class Concert implements Runnable{
 		this.speed = speed;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	@Override
-	public void run() {
-		while (!stop) {
-
-			
-			
-			
-			try {
-				Thread.sleep(speed);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			synchronized (this) {
-				while (pause)
-
-					try {
-						wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				if (stop)
-					break;
-			}
-		}
-
-	}
+	
 	
 	public void start() {
 		thread.start();
@@ -188,18 +256,74 @@ public class Concert implements Runnable{
 		notify();
 	}
 
+//	/**
+//	 * @return the connect
+//	 */
+//	public Connect getConnect() {
+//		return connect;
+//	}
+//
+//	/**
+//	 * @param connect the connect to set
+//	 */
+//	public void setConnect(Connect connect) {
+//		this.connect = connect;
+//	}
+	
 	/**
-	 * @return the connect
+	 * @return the connections
 	 */
-	public Connect getConnect() {
-		return connect;
+	public ArrayList<Connect> getConnections() {
+		return connections;
 	}
 
 	/**
-	 * @param connect the connect to set
+	 * @param connections the connections to set
 	 */
-	public void setConnect(Connect connect) {
-		this.connect = connect;
+	public void setConnections(ArrayList<Connect> connections) {
+		this.connections = connections;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return the capacity
+	 */
+	public int getCapacity() {
+		return capacity;
+	}
+
+	/**
+	 * @param capacity the capacity to set
+	 */
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	/**
+	 * @return the cup
+	 */
+	public int getCup() {
+		return cup;
+	}
+
+	/**
+	 * @param cup the cup to set
+	 */
+	public void setCup(int cup) {
+		this.cup = cup;
 	}
 	
 }

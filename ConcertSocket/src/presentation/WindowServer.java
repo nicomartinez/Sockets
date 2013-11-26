@@ -6,6 +6,7 @@ package presentation;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,7 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import logic.Server;
+import logic.Concert;
+
 
 /**
  * @author Juan Nicolas Martinez Fagua
@@ -37,14 +39,17 @@ public class WindowServer extends JFrame implements ActionListener{
 	
 	private JButton btnCreate;
 	
-	private Server server;
+	private Concert server;
+	private ArrayList<Concert> lst;
 	/**
 	 * este es el metodo constructor de la clase WindowServer.java
 	 */
-	public WindowServer() {
+	public WindowServer(ArrayList<Concert> lst) {
 		super("Crear Servidor");
 		setLayout(new FlowLayout());
 		setSize(300, 400);
+		
+		this.lst = lst;
 		
 		init();
 		addComponents();
@@ -91,8 +96,9 @@ public class WindowServer extends JFrame implements ActionListener{
 		if(e.getActionCommand().equals("Crear Servidor")){
 			if(!txtCapacity.getText().isEmpty() && !txtNumberPort.getText().isEmpty() && !txtPrice.getText().isEmpty()){
 				try {
-					server = new Server(Integer.parseInt(txtCapacity.getText()), (String) comboConcert.getSelectedItem(), Integer.parseInt(txtPrice.getText()), Integer.parseInt(txtNumberPort.getText()));
+					server = new Concert((String) comboConcert.getSelectedItem(), Integer.parseInt(txtPrice.getText()), Integer.parseInt(txtCapacity.getText()), Integer.parseInt(txtNumberPort.getText()));
 					server.initServer();
+					lst.add(server);
 					//this.dispose();
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
