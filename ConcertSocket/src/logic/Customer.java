@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import presentation.WindowCustomer;
+
 /**
  * @author Juan Nicolas Martinez Fagua
  *
@@ -29,7 +31,7 @@ public class Customer implements Runnable{
 	
 	private int option;
 	
-	
+	private WindowCustomer customer;
 
 	public long getSpeed() {
 		return this.speed;
@@ -75,11 +77,13 @@ public class Customer implements Runnable{
 		start();
 	}
 	
-	public Customer(int port, String ip) {
+	public Customer(int port, String ip, WindowCustomer customer) {
 		pause = false;
 		stop = false;
 		speed = 1000;
 		thread = new Thread(this);
+		
+		this.customer = customer;
 		
 		try {
 			//socket = new Socket(InetAddress.getByName("localhost"), 4500);
@@ -155,7 +159,8 @@ public class Customer implements Runnable{
 			switch (option) {
 			case 1:
 				try {
-					System.out.println("se recibio " + inputStream.readUTF());
+					//System.out.println("se recibio " + inputStream.readUTF());
+					customer.getAreaConcert().setText(customer.getAreaConcert().getText() + inputStream.readUTF());
 				} catch (IOException e1) {
 					//e1.printStackTrace();
 					System.out.println("no");

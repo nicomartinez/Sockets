@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+
+import presentation.WindowCustomer;
 
 /**
  * @author Juan Nicolas Martinez Fagua
@@ -60,7 +63,7 @@ public class Connect implements Runnable{
 		thread = new Thread(this);
 		start();
 		
-		initCommunication();
+		initCommunication("");
 	}
 	
 	public void closeConnetion(){
@@ -81,14 +84,13 @@ public class Connect implements Runnable{
 		}
 	}
 
-	public void initCommunication(){
+	public void initCommunication(String text){
 		try {
-			outputStream.writeInt(3);
-
-			outputStream.writeUTF("mensaje");
+			outputStream.writeInt(1);
+			outputStream.writeUTF(text);
 		} catch (IOException e) {
 			//e.printStackTrace();
-			
+			JOptionPane.showMessageDialog(null, "No se puede enviar la cancion");
 		}
 	}
 	
@@ -177,4 +179,34 @@ public class Connect implements Runnable{
 	public void setSpeed(long speed) {
 		this.speed = speed;
 	}
+
+	/**
+	 * @return the inputStream
+	 */
+	public DataInputStream getInputStream() {
+		return inputStream;
+	}
+
+	/**
+	 * @param inputStream the inputStream to set
+	 */
+	public void setInputStream(DataInputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	/**
+	 * @return the outputStream
+	 */
+	public DataOutputStream getOutputStream() {
+		return outputStream;
+	}
+
+	/**
+	 * @param outputStream the outputStream to set
+	 */
+	public void setOutputStream(DataOutputStream outputStream) {
+		this.outputStream = outputStream;
+	}
+	
+	
 }

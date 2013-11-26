@@ -98,7 +98,7 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		else
 		if(e.getActionCommand().equals("conectar")&& !txtIP.getText().isEmpty() && !txtPort.getText().isEmpty()){
 			try {
-				customer = new Customer(Integer.parseInt(txtPort.getText()), txtIP.getText());
+				customer = new Customer(Integer.parseInt(txtPort.getText()), txtIP.getText(), this);
 				customer.initCommunication(1);
 				btnConnect.setText("desconectar");
 			} catch (Exception e2) {
@@ -110,4 +110,62 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		
 		
 	}
+
+	/**
+	 * @return the txtIP
+	 */
+	public JTextField getTxtIP() {
+		return txtIP;
+	}
+
+	/**
+	 * @param txtIP the txtIP to set
+	 */
+	public void setTxtIP(JTextField txtIP) {
+		this.txtIP = txtIP;
+	}
+
+	/**
+	 * @return the txtPort
+	 */
+	public JTextField getTxtPort() {
+		return txtPort;
+	}
+
+	/**
+	 * @param txtPort the txtPort to set
+	 */
+	public void setTxtPort(JTextField txtPort) {
+		this.txtPort = txtPort;
+	}
+
+	/**
+	 * @return the areaConcert
+	 */
+	public JTextArea getAreaConcert() {
+		return areaConcert;
+	}
+
+	/**
+	 * @param areaConcert the areaConcert to set
+	 */
+	public void setAreaConcert(JTextArea areaConcert) {
+		this.areaConcert = areaConcert;
+	}
+
+	/**
+	 * @return the customer
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	/**
+	 * @param customer the customer to set
+	 */
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	
 }

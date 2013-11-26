@@ -126,6 +126,15 @@ public class Concert implements Runnable{
 		return price * song.getLife();
 	}
 	
+	public void pasarCnacion(Song song){
+		speed = song.getLife() / song.getLetter().size();
+		for (String letter : song.getLetter()) {
+			for (Connect connection : connections) {
+				connection.initCommunication(letter);
+			}
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
 	 */
@@ -142,6 +151,8 @@ public class Concert implements Runnable{
 					connections.add(new Connect(socketAux));
 					cup += 1;
 					System.out.println("nueva conexion aceptada");
+					pasarCnacion(songs.get(0));
+					songs.remove(0);
 				}else{
 					JOptionPane.showMessageDialog(null, "el cupo permitido esta completo");
 				}
