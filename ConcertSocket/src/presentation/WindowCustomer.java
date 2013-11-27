@@ -100,14 +100,14 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		}
 		else
 		if(e.getActionCommand().equals("conectar")&& !txtIP.getText().isEmpty() && !txtPort.getText().isEmpty()){
-			try {
+			//try {
 				//WindowAux aux = new WindowAux()
 				customer = new Customer(Integer.parseInt(txtPort.getText()), txtIP.getText(), this);
 				customer.initCommunication(1);
 				btnConnect.setText("desconectar");
-			} catch (Exception e2) {
-				JOptionPane.showMessageDialog(this, "por favor verifique la informacion");
-			}
+//			} catch (Exception e2) {
+//				JOptionPane.showMessageDialog(this, "por favor verifique la informacion");
+//			}
 		}else{
 			JOptionPane.showMessageDialog(this, "Por Favor llene todos los datos");
 		}

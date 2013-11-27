@@ -63,7 +63,8 @@ public class Connect implements Runnable{
 		thread = new Thread(this);
 		start();
 		
-		initCommunication(2, "Nombre concierto: " + name + ", Precio:  " + price);
+		//initCommunication(2, "Nombre concierto: " + name + ", Precio:  " + price);
+		initCommunication(1, "");
 	}
 	
 	public void closeConnetion(){

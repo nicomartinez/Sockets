@@ -53,9 +53,7 @@ public class ServerList extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				if(arg0.getActionCommand().equals("aceptar")){
 					dispose();
-					
 				}
-				
 			}
 		});
 		
@@ -75,6 +73,7 @@ public class ServerList extends JFrame{
 //				else
 					
 				serverSocket = new ServerSocket(i);
+				serverSocket.close();
 			} catch (Exception e) {
 					listServers.setText(listServers.getText() + "\n" + serverSocket.getInetAddress().getHostAddress() + "  " +  String.valueOf(i));
 				

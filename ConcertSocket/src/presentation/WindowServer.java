@@ -103,13 +103,13 @@ public class WindowServer extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Crear Servidor")){
 			if(!txtCapacity.getText().isEmpty() && !txtNumberPort.getText().isEmpty() && !txtPrice.getText().isEmpty()){
-			//	try {
+				try {
 					server = new Concert((String) comboConcert.getSelectedItem(), Integer.parseInt(txtPrice.getText()), Integer.parseInt(txtCapacity.getText()), Integer.parseInt(txtNumberPort.getText()));
 					server.initServer();
 					//this.dispose();
-			//	} catch (Exception e2) {
-			//		JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
-			//	}
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
+				}
 			//	lst.add(server);
 			}else{
 				JOptionPane.showMessageDialog(this, "Por favor ingrese todos los datos correspondientes");

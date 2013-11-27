@@ -1,5 +1,5 @@
 /**
- * esta clase se encarga de .
+ * esta clase se encarga de crear y administrar un concierto utilizando un servidor.
  */
 package logic;
 
@@ -150,7 +150,7 @@ public class Concert implements Runnable{
 				if(cup < capacity){
 					socketAux = serverSocket.accept();
 					connections.add(new Connect(socketAux ,name, price));
-					//connections.get(connections.size()-1).initCommunication(2, text);
+					connections.get(connections.size()-1).initCommunication(2, "Nombre concierto: " + name + ", Precio:  " + price);
 					cup += 1;
 					System.out.println("nueva conexion aceptada");
 					if(songs.get(1) == null){
