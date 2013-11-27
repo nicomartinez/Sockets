@@ -29,7 +29,6 @@ public class Song {
 	}
 	
 	public void updateSong(){
-		fileManager.readFile();
 		letter = fileManager.getLetter();
 	}
 

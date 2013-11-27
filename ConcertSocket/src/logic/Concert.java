@@ -55,7 +55,7 @@ public class Concert implements Runnable{
 	public Concert(String name, int price, int capacity, int port) {
 		this.name = name;
 		this.price = price;
-		this.priceSong = priceSong;
+//		this.priceSong = priceSong;
 		pause = false;
 		stop = false;
 		speed = 1000;
@@ -65,6 +65,7 @@ public class Concert implements Runnable{
 		this.capacity = capacity;
 		//concert = new Concert(name, price);
 		connections = new ArrayList<Connect>();
+		songs = new ArrayList<Song>();
 		fillSongs();
 		thread = new Thread(this);
 	}
@@ -76,8 +77,8 @@ public class Concert implements Runnable{
 				serverSocket = new ServerSocket(port);
 				start();
 			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println();
+				//e.printStackTrace();
+				System.out.println("error");
 			}
 		}
 	}
@@ -92,7 +93,6 @@ public class Concert implements Runnable{
 	public void closeServer(){
 		for (Connect connection : connections) {
 			connection.closeConnetion();
-			
 		}
 	}
 	
@@ -123,10 +123,11 @@ public class Concert implements Runnable{
 	}
 	
 	public int calculateCost(int duration, Song song){
-		return price * song.getLife();
+		priceSong = price * song.getLife();
+		return priceSong; 
 	}
 	
-	public void pasarCnacion(Song song){
+	public void pasarCancion(Song song){
 		speed = song.getLife() / song.getLetter().size();
 		for (String letter : song.getLetter()) {
 			for (Connect connection : connections) {
@@ -151,7 +152,7 @@ public class Concert implements Runnable{
 					connections.add(new Connect(socketAux));
 					cup += 1;
 					System.out.println("nueva conexion aceptada");
-					pasarCnacion(songs.get(0));
+					pasarCancion(songs.get(0));
 					songs.remove(0);
 				}else{
 					JOptionPane.showMessageDialog(null, "el cupo permitido esta completo");

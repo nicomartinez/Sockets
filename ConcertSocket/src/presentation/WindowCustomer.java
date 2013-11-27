@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -34,6 +35,8 @@ public class WindowCustomer extends JFrame implements ActionListener{
 	
 	private JTextArea areaConcert;
 	private Customer customer;
+	
+	private JScrollPane pane;
 	
 	/**
 	 * este es el metodo constructor de la clase ConcertManagerCustomer.java
@@ -67,13 +70,13 @@ public class WindowCustomer extends JFrame implements ActionListener{
 		areaConcert.setEditable(false);
 		
 		//customer = new Customer();
-		
-		
+		pane = new JScrollPane();
+		pane.setViewportView(areaConcert);
 	}
 	
 	public void addComponents(){
 		add(lblDescription);
-		add(areaConcert);
+		add(pane);
 		add(lblIP);
 		add(txtIP);
 		add(lblPort);

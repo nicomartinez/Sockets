@@ -160,7 +160,7 @@ public class Customer implements Runnable{
 			case 1:
 				try {
 					//System.out.println("se recibio " + inputStream.readUTF());
-					customer.getAreaConcert().setText(customer.getAreaConcert().getText() + inputStream.readUTF());
+					customer.getAreaConcert().setText(customer.getAreaConcert().getText() + "\n" +  inputStream.readUTF());
 				} catch (IOException e1) {
 					//e1.printStackTrace();
 					System.out.println("no");

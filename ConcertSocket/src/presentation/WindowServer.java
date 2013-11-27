@@ -35,7 +35,7 @@ public class WindowServer extends JFrame implements ActionListener{
 	private JTextField txtCapacity;
 	
 	private JComboBox<String> comboConcert;
-	private String[] concerts = {"Concierto1", "Concierto2", "Concierto3"};
+	private String[] concerts = {"Concierto rock", "Concierto pop", "Concierto electronica"};
 	
 	private JButton btnCreate;
 	
@@ -68,7 +68,10 @@ public class WindowServer extends JFrame implements ActionListener{
 		txtNumberPort = new JTextField(10);
 		txtPrice = new JTextField(10);
 		
-		comboConcert = new JComboBox<String>(concerts);
+		comboConcert = new JComboBox<String>();
+		comboConcert.addItem(concerts[0]);
+		comboConcert.addItem(concerts[1]);
+		comboConcert.addItem(concerts[2]);
 		
 		btnCreate = new JButton("Crear Servidor");
 		btnCreate.addActionListener(this);
@@ -95,14 +98,14 @@ public class WindowServer extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Crear Servidor")){
 			if(!txtCapacity.getText().isEmpty() && !txtNumberPort.getText().isEmpty() && !txtPrice.getText().isEmpty()){
-				try {
+			//	try {
 					server = new Concert((String) comboConcert.getSelectedItem(), Integer.parseInt(txtPrice.getText()), Integer.parseInt(txtCapacity.getText()), Integer.parseInt(txtNumberPort.getText()));
 					server.initServer();
-					lst.add(server);
 					//this.dispose();
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
-				}
+			//	} catch (Exception e2) {
+			//		JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
+			//	}
+				lst.add(server);
 			}else{
 				JOptionPane.showMessageDialog(this, "Por favor ingrese todos los datos correspondientes");
 			}

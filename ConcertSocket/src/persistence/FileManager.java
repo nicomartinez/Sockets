@@ -27,8 +27,11 @@ public class FileManager {
 	 */
 	public FileManager(String name) {
 		file = new File("");
-		this.name = file.getAbsolutePath() + name + ".music";
+		this.name = file.getAbsolutePath() + "\\src\\Songs\\" + name + ".music";
+		System.out.println("nombre"+ this.name);
 		letter = new ArrayList<String>();
+		openFile();
+		readFile();
 	}
 	
 	public void openFile(){
@@ -43,9 +46,10 @@ public class FileManager {
 	
 	public void readFile(){
 		String line = "";
-		openFile();
+		//openFile();
 		try {
 			while ((line = bufferedReader.readLine()) != null ) {
+				System.out.println("esta" + line);
 				letter.add(line);
 			}
 		} catch (Exception e) {
