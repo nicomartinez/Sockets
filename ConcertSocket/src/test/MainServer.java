@@ -22,8 +22,8 @@ import presentation.WindowServer;
 public class MainServer extends JFrame implements ActionListener{
 
 	private JButton btnCreate;
-	private ArrayList<Concert> lst;
-	
+//	private ArrayList<Concert> lst;
+//	
 	/**
 	 * este es el metodo constructor de la clase MainServer.java
 	 */
@@ -37,7 +37,7 @@ public class MainServer extends JFrame implements ActionListener{
 		btnCreate.setBounds(50, 20, 150, 30);
 		btnCreate.addActionListener(this);
 		
-		setLst(new ArrayList<Concert>());
+//		setLst(new ArrayList<Concert>());
 		
 		add(btnCreate);
 		
@@ -51,7 +51,7 @@ public class MainServer extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(arg0.getActionCommand().equals("Crear Servidor")){
-			WindowServer windowServer = new WindowServer(lst);
+			WindowServer windowServer = new WindowServer(/*lst*/);
 		}
 		
 	}
@@ -62,19 +62,19 @@ public class MainServer extends JFrame implements ActionListener{
 		MainServer mainServer = new MainServer();
 	}
 
-
-	/**
-	 * @return the lst
-	 */
-	public ArrayList<Concert> getLst() {
-		return lst;
-	}
-
-
-	/**
-	 * @param lst the lst to set
-	 */
-	public void setLst(ArrayList<Concert> lst) {
-		this.lst = lst;
-	}
+//
+//	/**
+//	 * @return the lst
+//	 */
+//	public ArrayList<Concert> getLst() {
+//		return lst;
+//	}
+//
+//
+//	/**
+//	 * @param lst the lst to set
+//	 */
+//	public void setLst(ArrayList<Concert> lst) {
+//		this.lst = lst;
+//	}
 }

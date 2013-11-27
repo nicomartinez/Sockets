@@ -41,7 +41,7 @@ public class Connect implements Runnable{
 	/**
 	 * este es el metodo constructor de la clase Connect.java
 	 */
-	public Connect(Socket socket) {
+	public Connect(Socket socket ,String name, int price) {
 		pause = false;
 		stop = false;
 		speed = 1000;
@@ -63,7 +63,7 @@ public class Connect implements Runnable{
 		thread = new Thread(this);
 		start();
 		
-		initCommunication("");
+		initCommunication(2, "Nombre concierto: " + name + ", Precio:  " + price);
 	}
 	
 	public void closeConnetion(){
@@ -84,9 +84,9 @@ public class Connect implements Runnable{
 		}
 	}
 
-	public void initCommunication(String text){
+	public void initCommunication(int option, String text){
 		try {
-			outputStream.writeInt(1);
+			outputStream.writeInt(option);
 			outputStream.writeUTF(text);
 		} catch (IOException e) {
 			//e.printStackTrace();
@@ -105,7 +105,7 @@ public class Connect implements Runnable{
 				option = inputStream.readInt();
 			} catch (IOException e1) {
 				//e1.printStackTrace();
-				System.out.println("no se recibio la opcion");
+				System.out.println("concierto finalizado");
 			}
 			switch (option) {
 			case 1:

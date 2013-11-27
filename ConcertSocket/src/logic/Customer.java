@@ -3,12 +3,15 @@
  */
 package logic;
 
+import java.awt.HeadlessException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
 
 import presentation.WindowCustomer;
 
@@ -85,6 +88,36 @@ public class Customer implements Runnable{
 		
 		this.customer = customer;
 		
+//		try {
+//			//socket = new Socket(InetAddress.getByName("localhost"), 4500);
+//			socket = new Socket(ip, port);
+//		} catch (UnknownHostException e) {
+//			//e.printStackTrace();
+//			System.out.println("el host no existe");
+//		} catch (IOException e) {
+//			//e.printStackTrace();
+//			System.out.println("el puerto no disponible");
+//		}
+//
+//		try {
+//			inputStream = new DataInputStream(socket.getInputStream());
+//		} catch (IOException e) {
+//			//e.printStackTrace();
+//			System.out.println("error creando canales de entrada");
+//		}
+//		try {
+//			outputStream = new DataOutputStream(socket.getOutputStream());
+//		} catch (IOException e) {
+//			//e.printStackTrace();
+//			System.out.println("error creando el canal de salida");
+//		}
+
+		openConnection();
+		start();
+	}
+
+	
+	public void openConnection(){
 		try {
 			//socket = new Socket(InetAddress.getByName("localhost"), 4500);
 			socket = new Socket(ip, port);
@@ -112,7 +145,6 @@ public class Customer implements Runnable{
 		start();
 	}
 
-
 	public void closeConnetion(){
 		try {
 			inputStream.close();
@@ -129,6 +161,7 @@ public class Customer implements Runnable{
 		} catch (IOException e) {
 			System.out.println("no se pudo desconectar del servidor");
 		}
+		stop();
 	}
 
 	public void initCommunication(int option){
@@ -167,7 +200,12 @@ public class Customer implements Runnable{
 				}
 				break;
 			case 2:
-				initCommunication(3);				
+				try {
+					JOptionPane.showMessageDialog(customer, inputStream.readUTF());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("no");
+				}			
 				break;
 			case 3:
 

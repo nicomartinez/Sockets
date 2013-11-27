@@ -131,7 +131,7 @@ public class Concert implements Runnable{
 		speed = song.getLife() / song.getLetter().size();
 		for (String letter : song.getLetter()) {
 			for (Connect connection : connections) {
-				connection.initCommunication(letter);
+				connection.initCommunication(1, letter);
 			}
 		} 
 	}
@@ -149,11 +149,19 @@ public class Concert implements Runnable{
 			try {
 				if(cup < capacity){
 					socketAux = serverSocket.accept();
-					connections.add(new Connect(socketAux));
+					connections.add(new Connect(socketAux ,name, price));
+					//connections.get(connections.size()-1).initCommunication(2, text);
 					cup += 1;
 					System.out.println("nueva conexion aceptada");
+					if(songs.get(1) == null){
+						JOptionPane.showMessageDialog(null, "el concierto terminara en "  + songs.get(0).getLife() + "segundos");
+					}
 					pasarCancion(songs.get(0));
 					songs.remove(0);
+					if(songs.get(0) == null){
+						closeServer();
+						stop();
+					}
 				}else{
 					JOptionPane.showMessageDialog(null, "el cupo permitido esta completo");
 				}

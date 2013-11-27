@@ -38,18 +38,19 @@ public class WindowServer extends JFrame implements ActionListener{
 	private String[] concerts = {"Concierto rock", "Concierto pop", "Concierto electronica"};
 	
 	private JButton btnCreate;
+	private JButton btnStadistics;
 	
 	private Concert server;
-	private ArrayList<Concert> lst;
+//	private ArrayList<Concert> lst;
 	/**
 	 * este es el metodo constructor de la clase WindowServer.java
 	 */
-	public WindowServer(ArrayList<Concert> lst) {
+	public WindowServer(/*ArrayList<Concert> lst*/) {
 		super("Crear Servidor");
 		setLayout(new FlowLayout());
-		setSize(300, 400);
-		
-		this.lst = lst;
+		setSize(405, 240);
+		setResizable(false);
+//		this.lst = lst;
 		
 		init();
 		addComponents();
@@ -58,11 +59,11 @@ public class WindowServer extends JFrame implements ActionListener{
 	}
 	
 	public void init(){
-		lblDescription = new JLabel("<html>En esta ventana se creara el servidor <br> que manejara un concierto</html>");
+		lblDescription = new JLabel("<html>En esta ventana se creara el servidor <br>que manejara un concierto</html>");
 		lblCapacity = new JLabel("cupo del servidor");
 		lblNumberPort = new JLabel("puerto que manejara el servidor");
 		lblPrice = new JLabel("precio por segundo que manejara el concierto");
-		lblNameConcert = new JLabel("concierto: ");
+		lblNameConcert = new JLabel("concierto:_________");
 		
 		txtCapacity = new JTextField(10);
 		txtNumberPort = new JTextField(10);
@@ -75,6 +76,9 @@ public class WindowServer extends JFrame implements ActionListener{
 		
 		btnCreate = new JButton("Crear Servidor");
 		btnCreate.addActionListener(this);
+		
+		btnStadistics = new JButton("Estadisticas");
+		btnStadistics.addActionListener(this);
 	}
 	
 	public void addComponents(){
@@ -88,6 +92,7 @@ public class WindowServer extends JFrame implements ActionListener{
 		add(lblNameConcert);
 		add(comboConcert);
 		add(btnCreate);
+		add(btnStadistics);
 		
 	}
 
@@ -105,10 +110,14 @@ public class WindowServer extends JFrame implements ActionListener{
 			//	} catch (Exception e2) {
 			//		JOptionPane.showMessageDialog(this, "Por favor verifique los datos ingresados");
 			//	}
-				lst.add(server);
+			//	lst.add(server);
 			}else{
 				JOptionPane.showMessageDialog(this, "Por favor ingrese todos los datos correspondientes");
 			}
+		}
+		else
+		if(e.getActionCommand().equals("Estadisticas")){
+			
 		}
 	}
 	
